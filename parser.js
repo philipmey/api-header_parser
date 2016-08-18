@@ -1,8 +1,11 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
-    res.send("Sweet");
+app.get('/api/whoami', function (req, res) {
+    console.log(req.headers['accept-language'][0]);
+    console.log(req.trailers);
+    
+    res.send({"ipaddress": req.headers['x-forwarded-for'], "language": req.headers['accept-language'], "software": req.headers['user-agent']});
 });
 
 app.listen(8080, function () {
